@@ -4,8 +4,7 @@
 
 Vagrant.configure("2") do |config|
 
- config.vm.box = "debian-jessie-amd64"
- config.vm.box_url = "https://downloads.sourceforge.net/project/vagrantboxjessie/debian80.box" 
+ config.vm.box = "debian-jessie-lxc-puppet"
 
  config.vm.provider "virtualbox" do |v|
    v.memory = 1024
@@ -14,6 +13,9 @@ Vagrant.configure("2") do |config|
 
  config.vm.define "docker-lxc" do |dockerlxc|
    dockerlxc.vm.network "private_network", ip: "33.33.33.50"
+   dockerlxc.vm.provision "puppet" do |puppet|
+    puppet.manifest_file = ""
+  end
  end
 
 end
